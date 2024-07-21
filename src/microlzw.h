@@ -46,6 +46,28 @@ void mlzw_compress(
 
 /**
  * 
+ * @brief Compresses a binary data using the Micro Lempel-Ziv-Welch algorithm.
+ *
+ * This function takes an input array and compresses it using the Micro Lempel-Ziv-Welch (MLZW) algorithm.
+ * The compressed output, compressed size, and dictionary size are returned through the parameters.
+ *
+ * @param input The input data to be compressed.
+ * @param input_size The size of the input data.
+ * @param compressed A pointer to an array that will store the compressed data.
+ * @param comp_size A pointer to a variable that will store the size of the compressed data.
+ * @param dict_size The size of the dictionary to be used in the compression.
+ *
+ */
+void mlzw_compress_bin(
+    uint8_t *input,
+    size_t input_size,
+    int *compressed,
+    size_t *comp_size,
+    int dict_size
+);
+
+/**
+ *
  * @brief Decompresses a string that was compressed using Micro Lempel-Ziv-Welch algorithm.
  *
  * This function takes a compressed input, decompresses it using the Micro Lempel-Ziv-Welch (MLZW) algorithm,
@@ -61,6 +83,26 @@ void mlzw_decompress(
     int *compressed,
     size_t comp_size,
     char *output,
+    int dict_size
+);
+
+/**
+ *
+ * @brief Decompresses a data stream that was compressed using Micro Lempel-Ziv-Welch algorithm.
+ *
+ * This function takes a compressed input, decompresses it using the Micro Lempel-Ziv-Welch (MLZW) algorithm,
+ * and stores the decompressed output in the provided output buffer.
+ *
+ * @param compressed A pointer to an array containing the compressed data.
+ * @param comp_size The size of the compressed data.
+ * @param output A pointer to an array that will store the decompressed output.
+ * @param dict_size The size of the dictionary used in the compression.
+ *
+ */
+void mlzw_decompress(
+    int *compressed,
+    size_t comp_size,
+    uint8_t *output,
     int dict_size
 );
 
