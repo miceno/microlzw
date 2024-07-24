@@ -58,10 +58,10 @@ void mlzw_compress(
  * @param dict_size The size of the dictionary to be used in the compression.
  *
  */
-void mlzw_compress_bin(
+void mlzw_compress_binary(
     uint8_t *input,
     size_t input_size,
-    int *compressed,
+    uint8_t *compressed,
     size_t *comp_size,
     int dict_size
 );
@@ -96,13 +96,15 @@ void mlzw_decompress(
  * @param compressed A pointer to an array containing the compressed data.
  * @param comp_size The size of the compressed data.
  * @param output A pointer to an array that will store the decompressed output.
+ * @param output_size A pointer to a variable that will store the size of the decompressed data.
  * @param dict_size The size of the dictionary used in the compression.
  *
  */
-void mlzw_decompress(
+void mlzw_decompress_binary(
     int *compressed,
     size_t comp_size,
     uint8_t *output,
+    size_t *output_size,
     int dict_size
 );
 

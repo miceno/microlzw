@@ -60,11 +60,11 @@ void mlzw_compress(char *input, int *compressed, size_t *comp_size, int dict_siz
     compressed[(*comp_size)++] = current_code;
 }
 
-void mlzw_compress_bin(uint8_t *input, size_t input_size, int *compressed, size_t *comp_size, int dict_size){
+void mlzw_compress_binary(uint8_t *input, size_t input_size, uint8_t *compressed, size_t *comp_size, int dict_size){
     mlzw_entry dictionary[dict_size];
-    int next_code = 256, current_code = input[0];
+    uint8_t next_code = 256, current_code = input[0];
 
-    for( size_t index=0, index<input_size, index++){
+    for( size_t index=0; index<input_size; index++){
         uint8_t current_ch = input[index];
         int code = (current_code << 8) + current_ch;
 
@@ -148,7 +148,7 @@ void mlzw_decompress(int *compressed, size_t comp_size, char *output, int dict_s
     output[output_idx] = '\0';
 }
 
-void mlzw_decompress_bin(int *compressed, size_t comp_size, uint8_t *output, int dict_size) {
+void mlzw_decompress_binary(int *compressed, size_t comp_size, uint8_t *output, size_t *output_size, int dict_size) {
     mlzw_entry dictionary[dict_size];
     int next_code = 256, idx = 0,
         current_code = compressed[idx++],
@@ -202,5 +202,5 @@ void mlzw_decompress_bin(int *compressed, size_t comp_size, uint8_t *output, int
     }
 
     output[output_idx++] = entry_idx;
-    output[output_idx] = '\0';
+    *output_size = output_idx;
 }
