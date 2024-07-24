@@ -2,8 +2,7 @@
 
 ![Arduino CI](https://github.com/nthnn/microlzw/actions/workflows/arduino_ci.yml/badge.svg) ![Arduino Lint](https://github.com/nthnn/microlzw/actions/workflows/arduino_lint.yml/badge.svg) [![PlatformIO Registry](https://badges.registry.platformio.org/packages/nthnn/library/microlzw.svg)](https://registry.platformio.org/libraries/nthnn/microlzw) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://github.com/nthnn/microlzw/blob/main/LICENSE)
 
-**microlzw** is a lightweight and embeddable Micro Lempel-Ziv-Welch (MLZW) compression library designed specifically for Arduino projects. It provides efficient string compression and decompression functionalities, catering to scenarios where memory and storage resources are limited.
-
+**microlzw** is a lightweight and embeddable Micro Lempel-Ziv-Welch (MLZW) compression library designed specifically for Arduino projects. It provides efficient string compression and decompression functionalities, catering to scenarios where memory and storage resources are limited. It also allows compressing binary streams.
 - **Memory-Friendly:** Designed to work within the constraints of Arduino projects, ensuring efficient use of memory resources.
 - **Easy Integration:** Simple and straightforward API for easy integration into your Arduino projects.
 - **Comprehensive Documentation:** The header file includes detailed comments to guide developers in using the library effectively.
@@ -58,6 +57,53 @@ This function takes a compressed input, decompresses it using the Micro Lempel-Z
 - `compressed` - A pointer to an array containing the compressed data.
 - `comp_size` - The size of the compressed data.
 - `output` - A pointer to an array that will store the decompressed output.
+- `dict_size` - The size of the dictionary used in the compression.
+
+```c
+void mlzw_compress_binary(
+    char *input,
+    int *compressed,
+    size_t *comp_size,
+    int dict_size
+);
+```
+
+Compresses a string using the Micro Lempel-Ziv-Welch algorithm.
+
+**Description:**
+
+This function takes an input stream of bytes and compresses it using the Micro Lempel-Ziv-Welch (MLZW) algorithm. The compressed output, compressed size, and dictionary size are returned through the parameters.
+
+**Parameters:**
+
+- `input` - The input binary object to be compressed.
+- `compressed` - A pointer to an array that will store the compressed data.
+- `comp_size` - A pointer to a variable that will store the size of the compressed data.
+- `dict_size` - The size of the dictionary to be used in the compression.
+
+---
+
+```c
+void mlzw_decompress_binary(
+    int *compressed,
+    size_t comp_size,
+    int *output,
+    int dict_size
+);
+```
+
+Decompresses a binary stream of bytes that was compressed using Micro Lempel-Ziv-Welch algorithm.
+
+**Description:**
+
+This function takes a compressed input, decompresses it using the Micro Lempel-Ziv-Welch (MLZW) algorithm, and stores the decompressed output in the provided output buffer.
+
+**Parameters:**
+
+- `compressed` - A pointer to an array containing the compressed data.
+- `comp_size` - The size of the compressed data.
+- `output` - A pointer to an array that will store the decompressed output.
+- `output_size` - A pointer to a variable that will store the size of the output data.
 - `dict_size` - The size of the dictionary used in the compression.
 
 ## License
