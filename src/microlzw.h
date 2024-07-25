@@ -101,7 +101,7 @@ void mlzw_decompress(
  *
  */
 void mlzw_decompress_binary(
-    int *compressed,
+    uint8_t *compressed,
     size_t comp_size,
     uint8_t *output,
     size_t *output_size,
